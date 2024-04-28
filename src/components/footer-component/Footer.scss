@@ -1,0 +1,10 @@
+.footer-nav-bg {
+    background-color: rgba(var(--bs-tertiary-bg-rgb));
+    transition: background-color .3s ease-in-out;
+    padding: 10px 10px;
+    border-radius: 100px;
+
+    &:hover {
+        background-color: #abc;
+    }
+}
