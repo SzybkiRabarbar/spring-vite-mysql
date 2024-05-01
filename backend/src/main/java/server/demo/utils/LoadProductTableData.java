@@ -25,7 +25,7 @@ public class LoadProductTableData implements CommandLineRunner {
         this.repository = repository;
     }
 
-    @Override  // Run then table is empty
+    @Override // Run then table is empty
     public void run(String... strings) throws Exception {
         if (repository.count() != 0) {
             return;
@@ -51,4 +51,3 @@ public class LoadProductTableData implements CommandLineRunner {
         }
     }
 }
-

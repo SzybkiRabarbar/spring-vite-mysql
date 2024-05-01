@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -42,6 +42,10 @@ public class Product {
 
     @Column(columnDefinition = "LONGTEXT")
     private String images;
+
+    public Product(){
+        // JpaSystem requires default constructor
+    }
 
     public Product(String productName, String productId, Integer listingPrice,
             Integer salePrice, Integer discount, String brand,
