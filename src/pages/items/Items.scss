@@ -1,0 +1,9 @@
+.page-change-buttons-container {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.page-change-button {
+    flex: 1;
+    margin: 5px;
+}

@@ -11,6 +11,7 @@ import AddedImages from './pages/added-images/AddedImages.tsx';
 import Items from './pages/items/Items.tsx';
 import Item from './pages/item/Item.tsx';
 import About from './pages/about/About.tsx';
+import '@smastrom/react-rating/style.css';
 
 const client = new QueryClient();
 

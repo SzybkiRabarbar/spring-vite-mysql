@@ -1,7 +1,7 @@
 
 interface fetchSettings {
-    from: number;
-    to: number;
+    pageNum: number;
+    pageSize: number;
     sortBy: string;
     desc: boolean;
 }
