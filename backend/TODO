@@ -1,11 +1,13 @@
 
 
 endpoint for rating and new table for it
-endpoint get list of items
+<!-- endpoint get list of items -->
 endpoint get 8 random items
 endpoint get details about item
 endpoint post user photo
 websocket to watch users photos
-orm from mysq (hibernate)
+<!-- orm from mysq (hibernate) -->
 oauth
 cors
+logger
+autotest

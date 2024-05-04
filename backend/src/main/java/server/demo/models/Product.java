@@ -43,13 +43,14 @@ public class Product {
     @Column(columnDefinition = "LONGTEXT")
     private String images;
 
-    public Product(){
+    public Product() {
         // JpaSystem requires default constructor
     }
 
     public Product(String productName, String productId, Integer listingPrice,
             Integer salePrice, Integer discount, String brand,
-            String description, Double rating, Integer reviews, String images) {
+            String description, Double rating, Integer reviews,
+            String images) {
         this.productName = productName;
         this.productId = productId;
         this.listingPrice = listingPrice;

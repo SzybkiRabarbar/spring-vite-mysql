@@ -31,10 +31,17 @@ public class LoadProductTableData implements CommandLineRunner {
             return;
         }
 
-        String csvFile = Paths.get("src", "main", "resources", "static", "nike_shoes_sales.csv").toString();
+        String csvFile = Paths.get(
+                "backend",
+                "src",
+                "main",
+                "resources",
+                "static",
+                "nike_shoes_sales.csv").toString();
 
         try (Reader in = new FileReader(csvFile)) {
-            Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in);
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT
+                    .withFirstRecordAsHeader().parse(in);
             for (CSVRecord record : records) {
                 String[] data = new String[record.size()];
                 for (int i = 0; i < record.size(); i++) {
