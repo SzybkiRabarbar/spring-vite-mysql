@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ButtonGroup, Col, Row, ToggleButton } from "react-bootstrap";
 import fetchSettings from "../../interfaces/fetchSettings";
+import { PAGE_SIZE } from "../../utils/consts";
 
 function SortByRadio(props: {setSettings: React.Dispatch<React.SetStateAction<fetchSettings>>}) {
   const [checked, setChecked] = useState(true);
@@ -15,7 +16,7 @@ function SortByRadio(props: {setSettings: React.Dispatch<React.SetStateAction<fe
   useEffect(() => props.setSettings(
     {
       pageNum: 0,
-      pageSize: 12,
+      pageSize: PAGE_SIZE,
       sortBy: radioValue,
       desc: checked,
     }

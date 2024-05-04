@@ -8,6 +8,8 @@ import { Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './ProductCards.scss';
 import { Rating } from '@smastrom/react-rating';
+import Product from '../../interfaces/Product';
+import parseImages from '../../utils/parseImages';
 
 
 function ProductsCards(props: {products: Product[]}) {
@@ -15,12 +17,7 @@ function ProductsCards(props: {products: Product[]}) {
     <Container fluid>
       <Row>
         {props.products.map((product, key) => {
-          let images: string[];
-          if (product.images) {
-            images = JSON.parse(product.images);
-          } else {
-            images = ["/no-image.jpg"];
-          }
+          let images = parseImages(product);
           return (
             <Col key={key}>
               <Card style={{ width: '26rem', margin: 'auto' }}>
@@ -30,7 +27,7 @@ function ProductsCards(props: {products: Product[]}) {
                   <Card.Text className='text-3line-truncate'>{ product.description }</Card.Text>
                   <Stack direction='horizontal'>
                     <Link 
-                      to={"/product/" + product.productId}
+                      to={"/item/" + product.productId}
                     >
                       <Button className="p-2" variant="primary">Check!</Button>
                     </Link>

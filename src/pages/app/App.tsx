@@ -11,6 +11,7 @@ import fetchSortedItemsWithinRange from '../../utils/fetchSortedItemsWithinRange
 import { useEffect } from 'react';
 import ProductsCards from '../../components/products-cards/ProductsCards';
 import ErrorComponent from '../../components/error-component/ErrorComponent';
+import Product from '../../interfaces/Product';
 
 var bestSellersSettings = {
   pageNum: 0,

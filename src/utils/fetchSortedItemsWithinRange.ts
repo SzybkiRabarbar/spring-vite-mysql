@@ -1,14 +1,14 @@
 import axios from "axios";
 import fetchSettings from "../interfaces/fetchSettings";
+import { BACKEND_PATH } from "./consts";
+import Product from "../interfaces/Product";
 
 
-var url = 'http://localhost:8080/products'
 
 type MutationFn = (settings: fetchSettings) => Promise<Product[]>;
 
 const fetchSortedItemsWithinRange: MutationFn = async (settings) => {
-// async function fetchSortedItemsWithinRange(settings: fetchSettings): Promise<Product[]> {
-    const response = await axios.post(url, settings);
+    const response = await axios.post(BACKEND_PATH + '/products', settings);
     return response.data;
 };
 

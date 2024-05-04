@@ -11,3 +11,5 @@ interface Product {
   reviews: number;
   images: string;
 }
+
+export default Product

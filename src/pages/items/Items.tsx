@@ -3,17 +3,17 @@ import fetchSortedItemsWithinRange from "../../utils/fetchSortedItemsWithinRange
 import { useEffect, useState } from "react";
 import fetchSettings from "../../interfaces/fetchSettings";
 import Spinner from 'react-bootstrap/Spinner';
-import Button from "react-bootstrap/Button";
 import ErrorComponent from "../../components/error-component/ErrorComponent";
 import ProductsCards from "../../components/products-cards/ProductsCards";
-import './Items.scss';
-import WhiteSpace from "../../components/white-space/WhiteSpace";
 import SortByRadio from "../../components/sort-by-radio/SortByRadio";
+import { PAGE_SIZE } from "../../utils/consts";
+import ChangePageButtons from "../../components/change-page-buttons/ChangePageButtons";
+import Product from "../../interfaces/Product";
 
 
 var defaultFetchSettings = {
   pageNum: 0,
-  pageSize: 12,
+  pageSize: PAGE_SIZE,
   sortBy: 'productName',
   desc: true
 }
@@ -27,15 +27,8 @@ function Items() {
     itemsMutation.mutate(settings)
   }, [settings]);
 
-  const changePageNum = (n: number) => {
-    setSettings(prevSettings => ({
-      ...prevSettings,
-      pageNum: settings.pageNum + n
-    }));
-  };
 
   return (<>
-    {/* <WhiteSpace /> */}
     <SortByRadio setSettings={setSettings}/>
     {itemsMutation.isLoading &&
       <Spinner animation="grow" />
@@ -45,23 +38,7 @@ function Items() {
     }
     {itemsMutation.data && <>
       <ProductsCards products={itemsMutation.data} />
-      <div className="page-change-buttons-container">
-          <Button 
-            className="page-change-button"
-            variant="outline-primary"
-            onClick={() => changePageNum(-1)}
-          >
-            Prev
-          </Button>
-          <Button 
-            className="page-change-button"
-            variant="outline-primary"
-            onClick={() => changePageNum(1)}
-          >
-            Next
-          </Button>
-      </div>
-
+      <ChangePageButtons settings={settings} setSettings={setSettings}/>
     </>}
   </>)
 }

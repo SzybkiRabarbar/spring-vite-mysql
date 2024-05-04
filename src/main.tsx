@@ -12,6 +12,7 @@ import Items from './pages/items/Items.tsx';
 import Item from './pages/item/Item.tsx';
 import About from './pages/about/About.tsx';
 import '@smastrom/react-rating/style.css';
+import { parseMutationArgs } from 'react-query/types/core/utils';
 
 const client = new QueryClient();
 
@@ -25,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path='/add-image' element={<AddImage />} />
           <Route path='/added-images' element={<AddedImages />} />
           <Route path='/items' element={<Items />} />
-          <Route path='/item' element={<Item />} />
+          <Route path='/item/:productId' element={<Item />} />
           <Route path='/about' element={<About />} />
         </Routes>
       </Layout>
