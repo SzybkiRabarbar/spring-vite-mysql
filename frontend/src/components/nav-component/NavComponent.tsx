@@ -3,18 +3,36 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/shoe-prints-solid.svg';
 import '../../utils/aElementNoneDecoration.scss';
 import './NavComponent.scss';
+import { useState } from 'react';
 
 
 function NavComponent() {
+  const [loggedIn, setLoggedIn] = useState<String | null>(localStorage.getItem('jwt'));
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
 
   const dropdownLinks = [
     ['Add photo', '/add-image'],
     ['Check gallery', '/added-images']
   ]
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    navigate(`/search?query=${search}`);
+  };
+
+  const handleSingOut = () => {
+    setLoggedIn(null);
+    localStorage.removeItem('jwt')
+  }
 
   return (
     <>
@@ -30,6 +48,17 @@ function NavComponent() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
+              <Nav.Link>
+                {loggedIn ?
+                  <Button onClick={handleSingOut}>Sing out!</Button>
+                :
+                  <Link  to={ '/login' }>
+                    <div className='expand'>
+                      Sing in!
+                    </div>
+                  </Link>
+                }
+              </Nav.Link>
               <Nav.Link>
                 <Link  to={ '/about' }>
                   <div className='expand'>
@@ -70,8 +99,11 @@ function NavComponent() {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={handleSearchChange}
               />
-              <Button variant="outline-primary">Search</Button>
+              <Button variant="outline-primary" onClick={handleSearchSubmit}>
+                Search
+              </Button>
             </Form>
           </Navbar.Collapse>
         </Container>

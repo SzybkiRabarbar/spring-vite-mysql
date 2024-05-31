@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Form, Button, FormControl } from 'react-bootstrap';
+import { Form, Button, FormControl, Row, Container } from 'react-bootstrap';
 
 import './AddImage.scss';
 import WhiteSpace from '../../components/white-space/WhiteSpace';
@@ -26,19 +26,29 @@ function AddImage() {
 
   return (<>
     <WhiteSpace />
-    <div className='add-image'>
-      <Form onSubmit={handleSubmit}> 
-        <Form.Group>
-          <FormControl type="file" onChange={handleFileChange} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        <Button variant="primary" type="reset">
-          Reset
-        </Button>
-      </Form>
-    </div>
+    <Container>
+      <Row>
+        <div className="col-md-12 text-center">
+          <h3 className="animate-charcter">Send kicks!</h3>
+        </div>
+      </Row>
+      <WhiteSpace />
+      <Row>
+        <div className='add-image'>
+          <Form onSubmit={handleSubmit}> 
+            <Form.Group>
+              <FormControl type="file" onChange={handleFileChange} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+            <Button variant="primary" type="reset">
+              Reset
+            </Button>
+          </Form>
+        </div>
+      </Row>
+    </Container>
   </>);
 }
 

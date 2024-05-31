@@ -27,11 +27,12 @@ function Item() {
 
   const { data: product, error, isLoading} = useProduct(productId);
 
-  const randomMutation = useMutation<Product[], unknown, fetchSettings>(fetchSortedItemsWithinRange);
+  const randomMutation = 
+    useMutation<Product[], unknown, fetchSettings>(fetchSortedItemsWithinRange);
 
   useEffect(() => {
     randomMutation.mutate(randomSettings);
-  }, []);
+  }, [product]);
 
 
   return (<>

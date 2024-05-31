@@ -12,7 +12,10 @@ import Items from './pages/items/Items.tsx';
 import Item from './pages/item/Item.tsx';
 import About from './pages/about/About.tsx';
 import '@smastrom/react-rating/style.css';
-import { parseMutationArgs } from 'react-query/types/core/utils';
+import Login from './pages/login/Login.tsx';
+import Register from './pages/register/Register.tsx';
+import SearchItem from './pages/search-item/SearchItem.tsx';
+import AboutPhotos from './pages/about-photos/AboutPhotos.tsx';
 
 const client = new QueryClient();
 
@@ -27,7 +30,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path='/added-images' element={<AddedImages />} />
           <Route path='/items' element={<Items />} />
           <Route path='/item/:productId' element={<Item />} />
+          <Route path='search' element={<SearchItem />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/about' element={<About />} />
+          <Route path='/about-photos' element={<AboutPhotos />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -1,0 +1,9 @@
+.hover-effect {
+    transition: background-color 0.3s ease, box-shadow 0.6s ease; /* Add a smooth transition effect */
+    box-shadow: none;
+
+    &:hover {
+        background-color: rgb(11, 105, 245); /* Change the background color on hover */
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;;
+    }
+}
