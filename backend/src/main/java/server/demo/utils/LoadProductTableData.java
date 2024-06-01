@@ -49,6 +49,13 @@ public class LoadProductTableData implements CommandLineRunner {
                     System.err.println(data[i]);
                 }
 
+                // Check if productId exists in db
+                String productId = data[1];
+                if (productId == null ||
+                        repository.findByProductId(productId) == null) {
+                    continue;
+                }
+
                 Product product = new Product(data);
 
                 repository.save(product);

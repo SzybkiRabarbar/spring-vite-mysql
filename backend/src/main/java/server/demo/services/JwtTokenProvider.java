@@ -2,10 +2,13 @@ package server.demo.services;
 
 import io.jsonwebtoken.Jwts;
 import server.demo.models.User;
-import server.demo.utils.GetKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import io.jsonwebtoken.security.Keys;
+
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 
 import java.util.Date;
 
@@ -26,8 +29,13 @@ public class JwtTokenProvider {
                 // .keyId(jwtSecret)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(GetKey.getKey())
+                .signWith(this.getKey())
                 .compact();
+    }
+
+    public Key getKey() {
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     // other methods...

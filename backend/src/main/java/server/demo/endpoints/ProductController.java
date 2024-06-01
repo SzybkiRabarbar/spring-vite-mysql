@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +81,17 @@ public class ProductController {
             Page<Product> productPage = repository.findAll(pageRequest);
             return productPage.getContent();
         }
+    }
+
+    @GetMapping("/search-products")
+    Page<Product> searchProduct(@RequestParam("query") String query,
+            @RequestParam(defaultValue = "0") int pageNum,
+            @RequestParam(defaultValue = "6") int size) {
+        Pageable pageable = PageRequest.of(pageNum, size,
+                Sort.by("reviews").descending());
+        return repository
+                .findByProductNameContainingOrProductIdContainingOrBrandContainingOrDescriptionContaining(
+                        query, query, query, query, pageable);
     }
 
     static class ReadProductsSettings {

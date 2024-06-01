@@ -24,20 +24,22 @@ public class UserController {
 
     // Endpoint to add new user
     @PostMapping("/users")
-    public ResponseEntity<?> addUser(@RequestBody User user) {
-        if (userService.existsByUsername(user.getUsername())) {
+    public ResponseEntity<?> addUser(@RequestBody UserCredentials userCreds) {
+        System.out.println("-addUser-");
+        if (userService.existsByUsername(userCreds.getUsername())) {
+            System.out.println("User exists!");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        // Password encryption is handled by the UserService
-        userService.save(user);
+        userService.createUser(userCreds.username, userCreds.password);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Endpoint to authenticate user and return JWT
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        user = userService.authenticate(user.getUsername(),
-                user.getPassword());
+    public ResponseEntity<?> login(@RequestBody UserCredentials userCreds) {
+        System.out.println("-login-");
+        User user = userService.authenticate(userCreds.getUsername(),
+                userCreds.getPassword());
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -45,5 +47,23 @@ public class UserController {
 
         String jwt = jwtTokenProvider.generateJwtToken(user);
         return ResponseEntity.ok(jwt);
+    }
+
+    static class UserCredentials {
+        private String username;
+        private String password;
+
+        public String getUsername() {
+            return username;
+        }
+        public void setUsername(String username) {
+            this.username = username;
+        }
+        public String getPassword() {
+            return password;
+        }
+        public void setPassword(String password) {
+            this.password = password;
+        }
     }
 }
