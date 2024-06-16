@@ -16,7 +16,7 @@ public class Product {
     @Column
     private String productName;
 
-    @Column
+    @Column(unique = true)
     private String productId;
 
     @Column

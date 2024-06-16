@@ -1,5 +1,8 @@
 package server.demo.services;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import server.demo.models.User;
 
@@ -12,6 +15,8 @@ import java.security.Key;
 
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 @Service
 public class JwtTokenProvider {
 
@@ -21,22 +26,60 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    public Key getKey() {
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
     public String generateJwtToken(User user) {
 
         return Jwts.builder()
                 .subject(user.getUsername())
-                // .header()
-                // .keyId(jwtSecret)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(this.getKey())
                 .compact();
     }
 
-    public Key getKey() {
-        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
+    public boolean validateJwtToken(String token) {
+
+        JwtParser jwtParser = Jwts.parser()
+                .verifyWith((SecretKey) this.getKey()).build();
+
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        try {
+            jwtParser.parse(token);
+            return true;
+        } catch (Exception e) {
+            System.out.println(
+                    "An error occurred while validating the JWT token: "
+                            + e.getMessage());
+        }
+
+        return false;
     }
 
-    // other methods...
+    public String getSubjectFromJwtToken(String token) {
+        JwtParser jwtParser = Jwts.parser()
+                .verifyWith((SecretKey) this.getKey()).build();
+
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        try {
+            Jws<Claims> claimsJws = jwtParser.parseSignedClaims(token);
+            return claimsJws.getPayload().getSubject();
+        } catch (Exception e) {
+            System.out.println(
+                    "An error occurred while validating the JWT token: "
+                            + e.getMessage());
+        }
+
+        return null;
+    }
+
 }

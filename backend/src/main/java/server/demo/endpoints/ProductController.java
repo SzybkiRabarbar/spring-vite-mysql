@@ -94,6 +94,7 @@ public class ProductController {
                         query, query, query, query, pageable);
     }
 
+
     static class ReadProductsSettings {
         private int pageNum;
         private int pageSize;
