@@ -20,7 +20,8 @@ var defaultFetchSettings = {
 
 
 function Items() {
-  const itemsMutation = useMutation<Product[], unknown, fetchSettings>(fetchSortedItemsWithinRange);
+  const itemsMutation = 
+    useMutation<Product[], unknown, fetchSettings>(fetchSortedItemsWithinRange);
   const [settings, setSettings] = useState<fetchSettings>(defaultFetchSettings);
 
   useEffect(() => {

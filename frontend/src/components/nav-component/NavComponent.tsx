@@ -50,7 +50,11 @@ function NavComponent() {
             <Nav className="me-auto">
               <Nav.Link>
                 {loggedIn ?
-                  <Button onClick={handleSingOut}>Sing out!</Button>
+                  <Link to={ '/login' } onClick={handleSingOut}>
+                    <div className='expand'>
+                      Sing out!
+                    </div>
+                  </Link>
                 :
                   <Link  to={ '/login' }>
                     <div className='expand'>

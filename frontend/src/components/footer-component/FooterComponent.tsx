@@ -22,28 +22,30 @@ function FooterComponent() {
     <>
       <Navbar fixed='bottom'>
         <Nav
-            // className='footer-nav-bg'
-            // activeKey="/home"
+        // className='footer-nav-bg'
+        // activeKey="/home"
         >
-          {links.map((data: string[], key) => (<>
-            {data[0] &&
-              <Nav.Item key={key} 
-                className='footer-nav-bg'
-              >
-                <a href={ data[1] } target='_blank'>
-                  <Image 
-                    src={`/logos/${data[0]}.svg`}
-                    alt={data[0]}
-                    width='30px'
-                    height='30px'
-                  />
-                </a>
-              </Nav.Item>
-            }
-          </>))}
+          {links.map((data: string[], key) => (
+            <div key={key}>
+              {data[0] &&
+                <Nav.Item key={key}
+                  className='footer-nav-bg'
+                >
+                  <a href={data[1]} target='_blank'>
+                    <Image
+                      src={`/logos/${data[0]}.svg`}
+                      alt={data[0]}
+                      width='30px'
+                      height='30px'
+                    />
+                  </a>
+                </Nav.Item>
+              }
+            </div>
+          ))}
         </Nav>
         <Nav
-            // onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+        // onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
         >
           <ContactPopup />
         </Nav>
