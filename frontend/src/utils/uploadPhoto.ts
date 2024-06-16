@@ -21,10 +21,10 @@ const uploadPhoto = async (
   return response.data;
 };
 
-const useUploadPhoto = () => {
-  return useMutation((data: {
-    file: File, token: String
-  }) => uploadPhoto(data));
+const useUploadPhoto = (onSuccess: () => void) => {
+  return useMutation((data: { file: File, token: String }) => uploadPhoto(data), {
+    onSuccess,
+  });
 };
 
 export default useUploadPhoto;

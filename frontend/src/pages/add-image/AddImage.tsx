@@ -8,15 +8,26 @@ import useUploadPhoto from '../../utils/uploadPhoto';
 function AddImage() {
   const [loggedIn] = useState<String | null>(localStorage.getItem('jwt'));
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const mutation = useUploadPhoto();
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showSuccesModal, setShowSuccesModal] = useState(false);
+
+  const handleShowSuccessModal = () => {
+    setShowSuccesModal(true);
+  };
+
+  const mutation = useUploadPhoto(handleShowSuccessModal);
 
   const handleError = () => {
     setShowErrorModal(true);
   };
 
+
   const handleCloseErrorModal = () => {
     setShowErrorModal(false);
+  };
+
+  const handleCloseSuccesModal = () => {
+    setShowSuccesModal(false)
   };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +84,19 @@ function AddImage() {
       <Modal.Body>{`error`}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseErrorModal}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+
+    {/* Succes Modal */}
+    <Modal show={showSuccesModal} onHide={handleCloseSuccesModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Succes</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{`Image added succesfully`}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseSuccesModal}>
           Close
         </Button>
       </Modal.Footer>
