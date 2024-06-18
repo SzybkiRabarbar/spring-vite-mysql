@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import server.demo.models.User;
 import server.demo.repositories.UserRepository;
+import server.demo.services.ImageDataService;
 import server.demo.services.JwtTokenProvider;
 import server.demo.utils.StringsUtils;
 
@@ -31,6 +32,9 @@ public class ImageController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageDataService imageDataService;
 
     private static Path UPLOADED_FOLDER = Paths
             .get(System.getProperty("user.dir"), "uploaded-images");
@@ -61,6 +65,8 @@ public class ImageController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
+        imageDataService.createImageData(user, fileName);
+
         System.out.println("New added file: " + fileName);
 
         return new ResponseEntity<>("Successfully uploaded - " +
@@ -73,11 +79,10 @@ public class ImageController {
             throws IOException {
 
         byte[] bytes = file.getBytes();
-        String fileName = StringsUtils.normalizeText("I"
-                + LocalTime.now().toString()
-                + user.getUsername()
-                + file.getOriginalFilename())
-                + StringsUtils.getFileExtension(file.getOriginalFilename());
+        String fileName = ("IMG_"
+                + StringsUtils.normalizeText(
+                        user.getUsername() + LocalTime.now().toString())
+                + StringsUtils.getFileExtension(file.getOriginalFilename()));
         Path filePath = UPLOADED_FOLDER.resolve(fileName);
         Files.write(filePath, bytes);
         return fileName;
