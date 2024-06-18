@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import server.demo.models.User;
-import server.demo.models.UserRepository;
+import server.demo.repositories.UserRepository;
 
 @Service
 public class UserService {

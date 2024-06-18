@@ -3,9 +3,9 @@ package server.demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import server.demo.models.ProductRatingRepository;
-import server.demo.models.ProductRepository;
 import server.demo.models.User;
+import server.demo.repositories.ProductRatingRepository;
+import server.demo.repositories.ProductRepository;
 import server.demo.models.Product;
 import server.demo.models.ProductRating;
 

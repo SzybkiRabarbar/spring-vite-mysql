@@ -1,15 +1,10 @@
 package server.demo.endpoints;
 
-import java.util.Optional;
-
-import javax.management.relation.RelationNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import server.demo.models.Product;
 import server.demo.models.ProductRating;
-import server.demo.models.ProductRatingRepository;
-import server.demo.models.ProductRepository;
 import server.demo.models.User;
-import server.demo.models.UserRepository;
+import server.demo.repositories.ProductRatingRepository;
+import server.demo.repositories.ProductRepository;
+import server.demo.repositories.UserRepository;
 import server.demo.services.JwtTokenProvider;
 import server.demo.services.RateServices;
 

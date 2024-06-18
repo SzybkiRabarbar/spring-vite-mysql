@@ -24,7 +24,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 
 import server.demo.models.Product;
-import server.demo.models.ProductRepository;
+import server.demo.repositories.ProductRepository;
 
 @CrossOrigin
 @RestController

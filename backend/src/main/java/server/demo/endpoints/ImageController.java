@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import server.demo.models.User;
-import server.demo.models.UserRepository;
+import server.demo.repositories.UserRepository;
 import server.demo.services.JwtTokenProvider;
 import server.demo.utils.StringsUtils;
 

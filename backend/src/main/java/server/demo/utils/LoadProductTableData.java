@@ -5,7 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import server.demo.models.Product;
-import server.demo.models.ProductRepository;
+import server.demo.repositories.ProductRepository;
+
 import java.nio.file.Paths;
 
 import org.apache.commons.csv.CSVFormat;
