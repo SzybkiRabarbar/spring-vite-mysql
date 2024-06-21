@@ -18,8 +18,8 @@ import server.demo.models.User;
 import server.demo.repositories.ProductRatingRepository;
 import server.demo.repositories.ProductRepository;
 import server.demo.repositories.UserRepository;
-import server.demo.services.JwtTokenProvider;
-import server.demo.services.RateServices;
+import server.demo.services.JwtTokenService;
+import server.demo.services.RateService;
 
 @CrossOrigin
 @RestController
@@ -27,13 +27,13 @@ import server.demo.services.RateServices;
 public class RateController {
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenService jwtTokenService;
 
     @Autowired
     private UserRepository userRepo;
 
     @Autowired
-    private RateServices rateServices;
+    private RateService rateServices;
 
     @Autowired
     private ProductRepository productRepo;
@@ -43,17 +43,17 @@ public class RateController {
 
     @PostMapping("/rate")
     ResponseEntity<?> addRate(
-            @RequestBody RateServices.RateDTO rateDTO,
+            @RequestBody RateService.RateDTO rateDTO,
             @RequestHeader("Authorization") String token) {
 
         String productId = rateDTO.getProductId();
         double rate = rateDTO.getRate();
 
-        if (!jwtTokenProvider.validateJwtToken(token)) {
+        if (!jwtTokenService.validateJwtToken(token)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        String username = jwtTokenProvider.getSubjectFromJwtToken(token);
+        String username = jwtTokenService.getSubjectFromJwtToken(token);
         User user = userRepo.findByUsername(username);
 
         if (user == null) {
@@ -76,11 +76,11 @@ public class RateController {
             @RequestParam(value = "productId", required = true) String productId,
             @RequestHeader("Authorization") String token) {
 
-        if (!jwtTokenProvider.validateJwtToken(token)) {
+        if (!jwtTokenService.validateJwtToken(token)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        String username = jwtTokenProvider.getSubjectFromJwtToken(token);
+        String username = jwtTokenService.getSubjectFromJwtToken(token);
         User user = userRepo.findByUsername(username);
 
         if (user == null) {

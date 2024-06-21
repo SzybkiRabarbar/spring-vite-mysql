@@ -13,7 +13,7 @@ import server.demo.models.ProductRating;
  * RateServices
  */
 @Service
-public class RateServices {
+public class RateService {
 
     @Autowired
     private ProductRatingRepository productRatingRepository;

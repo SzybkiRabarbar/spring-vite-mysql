@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import server.demo.models.User;
-import server.demo.services.JwtTokenProvider;
+import server.demo.services.JwtTokenService;
 import server.demo.services.UserService;
 
 @RestController
@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenService jwtTokenProvider;
 
     // Endpoint to add new user
     @PostMapping("/users")

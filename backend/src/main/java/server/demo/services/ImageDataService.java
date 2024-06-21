@@ -20,4 +20,10 @@ public class ImageDataService {
         imageDataRepository.save(newImageData);
     }
 
+    public ImageData getImageDataWithNBiggestId(int position) {
+        ImageData imageData = imageDataRepository
+                .getImageDataWithNBiggestId(position);
+        return imageData;
+    }
+
 }

@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import server.demo.models.User;
 import server.demo.repositories.UserRepository;
 import server.demo.services.ImageDataService;
-import server.demo.services.JwtTokenProvider;
+import server.demo.services.JwtTokenService;
 import server.demo.utils.StringsUtils;
 
 @RestController
@@ -28,7 +28,7 @@ import server.demo.utils.StringsUtils;
 public class ImageController {
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenService jwtTokenService;
 
     @Autowired
     private UserRepository userRepository;
@@ -43,11 +43,11 @@ public class ImageController {
     public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile uploadfile,
             @RequestHeader("Authorization") String token) {
-        if (!jwtTokenProvider.validateJwtToken(token)) {
+        if (!jwtTokenService.validateJwtToken(token)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        String username = jwtTokenProvider.getSubjectFromJwtToken(token);
+        String username = jwtTokenService.getSubjectFromJwtToken(token);
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
